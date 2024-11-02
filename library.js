@@ -24,18 +24,34 @@ console.log(book1.name);
 
 let created_doms = [];
 
-for (const book of myLibrary) {
-  let title = document.createElement("h3");
-  let author = document.createElement("p");
-  let date = document.createElement("p");
-  title.textContent = book.name;
-  author.textContent = book.author;
-  date.textContent = book.date;
-  let card = document.createElement("div");
-  card.classList.add("card");
-  card.appendChild(title);
-  card.appendChild(author);
-  card.appendChild(date);
-  list.appendChild(card);
-  created_doms.push(card);
+function displayBooks() {
+  for (const book of myLibrary) {
+    let title = document.createElement("h3");
+    let author = document.createElement("p");
+    let date = document.createElement("p");
+    title.textContent = book.name;
+    author.textContent = book.author;
+    date.textContent = book.date;
+    let card = document.createElement("div");
+    card.classList.add("card");
+    card.appendChild(title);
+    card.appendChild(author);
+    card.appendChild(date);
+
+    let remove_btn = document.createElement("button");
+    remove_btn.textContent = "remove";
+    remove_btn.classList.add("rmv");
+
+    remove_btn.addEventListener("click", removeParent);
+
+    card.appendChild(remove_btn);
+    list.appendChild(card);
+    created_doms.push(card);
+  }
 }
+
+function removeParent() {
+  this.parentElement.remove();
+}
+
+displayBooks();

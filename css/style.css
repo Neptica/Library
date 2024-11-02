@@ -9,6 +9,11 @@ body {
   justify-content: center;
 }
 
+.container {
+  width: 30%;
+  padding-top: 20px;
+}
+
 #list {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -16,8 +21,20 @@ body {
 }
 
 .card {
+  position: relative;
   display: flex;
   flex-direction: column;
   background-color: brown;
   padding: 20px;
+}
+
+.create {
+  padding-top: 20px;
+}
+
+.rmv {
+  position: absolute;
+  right: 5px;
+  bottom: 5px;
+  padding: 2px;
 }
