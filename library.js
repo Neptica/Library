@@ -5,9 +5,11 @@ function Book(name, author, date) {
   this.author = author;
   this.date = date;
   this.read = false;
+  this.id = 0;
 }
 
 function addBookToLibrary(book) {
+  book.id = findAvailableId();
   myLibrary.push(book);
 }
 
@@ -39,7 +41,10 @@ function addToDisplay(bookOBJ) {
   author.textContent = bookOBJ.author;
   date.textContent = bookOBJ.date;
   let card = document.createElement("div");
+
   card.classList.add("card");
+  card.id = bookOBJ.id;
+  console.log(card.id);
   card.appendChild(title);
   card.appendChild(author);
   card.appendChild(date);
@@ -68,7 +73,28 @@ function addToDisplay(bookOBJ) {
 }
 
 function removeParent() {
+  const bookId = this.parentElement.id;
+  for (const book of myLibrary) {
+    if (bookId == book.id) {
+      const index = myLibrary.indexOf(book);
+      myLibrary.splice(index, 1);
+    }
+  }
   this.parentElement.remove();
+}
+
+function findAvailableId() {
+  if (myLibrary.length == 0) return 0;
+  for (let i = 0; i < myLibrary.length + 1; i++) {
+    let found = true;
+    for (const book of myLibrary) {
+      if (i == book.id) {
+        found = false;
+        break;
+      }
+    }
+    if (found) return i;
+  }
 }
 
 displayBooks();
@@ -87,7 +113,6 @@ const dateOfRelease = document.getElementById("release");
 
 join.addEventListener("click", (e) => {
   e.preventDefault();
-  // TODO: collect text inputs from HTML inputs, add them as objects to the array, and clear the inputs
   const book = new Book(
     nameOfBook.value,
     authorOfBook.value,
@@ -100,3 +125,5 @@ join.addEventListener("click", (e) => {
   addToDisplay(book);
   form.close();
 });
+
+// TODO: violating node error
