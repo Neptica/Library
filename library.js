@@ -4,6 +4,7 @@ function Book(name, author, date) {
   this.name = name;
   this.author = author;
   this.date = date;
+  this.read = false;
 }
 
 function addBookToLibrary(book) {
@@ -12,7 +13,7 @@ function addBookToLibrary(book) {
 
 const book1 = new Book("Yes", "Queen", "1955");
 const book2 = new Book("King Kong", "Tolkein", "1459");
-const book3 = new Book("Future", "JJR", "4857");
+const book3 = new Book("Long Name Title X OR Gates of Hell", "JJR", "4857");
 
 addBookToLibrary(book1);
 addBookToLibrary(book2);
@@ -38,6 +39,18 @@ function displayBooks() {
     card.appendChild(author);
     card.appendChild(date);
 
+    let reader = document.createElement("div");
+    let read = document.createElement("input");
+    let rad = document.createElement("label");
+    rad.htmlfor = "read";
+    rad.textContent = "Read";
+    read.type = "checkbox";
+    read.id = "read";
+    read.style = "margin-left: 8px";
+    reader.appendChild(rad);
+    reader.appendChild(read);
+    card.appendChild(reader);
+
     let remove_btn = document.createElement("button");
     remove_btn.textContent = "remove";
     remove_btn.classList.add("rmv");
@@ -55,3 +68,17 @@ function removeParent() {
 }
 
 displayBooks();
+
+const add = document.getElementById("add");
+const form = document.getElementById("dialog");
+const join = document.getElementById("join");
+
+add.addEventListener("click", () => {
+  form.show();
+});
+
+join.addEventListener("click", (e) => {
+  e.preventDefault();
+  // TODO: collect text inputs from HTML inputs, add them as objects to the array, and clear the inputs
+  form.close();
+});
