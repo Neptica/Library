@@ -27,40 +27,44 @@ let created_doms = [];
 
 function displayBooks() {
   for (const book of myLibrary) {
-    let title = document.createElement("h3");
-    let author = document.createElement("p");
-    let date = document.createElement("p");
-    title.textContent = book.name;
-    author.textContent = book.author;
-    date.textContent = book.date;
-    let card = document.createElement("div");
-    card.classList.add("card");
-    card.appendChild(title);
-    card.appendChild(author);
-    card.appendChild(date);
-
-    let reader = document.createElement("div");
-    let read = document.createElement("input");
-    let rad = document.createElement("label");
-    rad.htmlfor = "read";
-    rad.textContent = "Read";
-    read.type = "checkbox";
-    read.id = "read";
-    read.style = "margin-left: 8px";
-    reader.appendChild(rad);
-    reader.appendChild(read);
-    card.appendChild(reader);
-
-    let remove_btn = document.createElement("button");
-    remove_btn.textContent = "remove";
-    remove_btn.classList.add("rmv");
-
-    remove_btn.addEventListener("click", removeParent);
-
-    card.appendChild(remove_btn);
-    list.appendChild(card);
-    created_doms.push(card);
+    addToDisplay(book);
   }
+}
+
+function addToDisplay(bookOBJ) {
+  let title = document.createElement("h3");
+  let author = document.createElement("p");
+  let date = document.createElement("p");
+  title.textContent = bookOBJ.name;
+  author.textContent = bookOBJ.author;
+  date.textContent = bookOBJ.date;
+  let card = document.createElement("div");
+  card.classList.add("card");
+  card.appendChild(title);
+  card.appendChild(author);
+  card.appendChild(date);
+
+  let reader = document.createElement("div");
+  let read = document.createElement("input");
+  let rad = document.createElement("label");
+  rad.htmlfor = "read";
+  rad.textContent = "Read";
+  read.type = "checkbox";
+  read.id = "read";
+  read.style = "margin-left: 8px";
+  reader.appendChild(rad);
+  reader.appendChild(read);
+  card.appendChild(reader);
+
+  let remove_btn = document.createElement("button");
+  remove_btn.textContent = "remove";
+  remove_btn.classList.add("rmv");
+
+  remove_btn.addEventListener("click", removeParent);
+
+  card.appendChild(remove_btn);
+  list.appendChild(card);
+  created_doms.push(card);
 }
 
 function removeParent() {
@@ -77,8 +81,22 @@ add.addEventListener("click", () => {
   form.show();
 });
 
+const nameOfBook = document.getElementById("book_title");
+const authorOfBook = document.getElementById("author");
+const dateOfRelease = document.getElementById("release");
+
 join.addEventListener("click", (e) => {
   e.preventDefault();
   // TODO: collect text inputs from HTML inputs, add them as objects to the array, and clear the inputs
+  const book = new Book(
+    nameOfBook.value,
+    authorOfBook.value,
+    dateOfRelease.value,
+  );
+  nameOfBook.value = "";
+  authorOfBook.value = "";
+  dateOfRelease.value = "";
+  addBookToLibrary(book);
+  addToDisplay(book);
   form.close();
 });
