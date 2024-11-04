@@ -104,14 +104,18 @@ const add = document.getElementById("add");
 const form = document.getElementById("dialog");
 const join = document.getElementById("join");
 const cancel = document.getElementById("cancel");
+const overlay = document.getElementById("overlay");
 
 cancel.addEventListener("click", (e) => {
+  form.classList.remove("active");
+  overlay.classList.remove("active");
   e.preventDefault();
   form.close();
 });
 
 add.addEventListener("click", () => {
-  form.show();
+  form.classList.add("active");
+  overlay.classList.add("active");
 });
 
 const nameOfBook = document.getElementById("book_title");
