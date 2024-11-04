@@ -103,6 +103,12 @@ displayBooks();
 const add = document.getElementById("add");
 const form = document.getElementById("dialog");
 const join = document.getElementById("join");
+const cancel = document.getElementById("cancel");
+
+cancel.addEventListener("click", (e) => {
+  e.preventDefault();
+  form.close();
+});
 
 add.addEventListener("click", () => {
   form.show();
