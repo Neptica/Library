@@ -126,5 +126,3 @@ join.addEventListener("click", (e) => {
   addToDisplay(book);
   form.close();
 });
-
-// TODO: violating node error
