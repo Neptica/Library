@@ -23,8 +23,6 @@ addBookToLibrary(book3);
 
 const list = document.getElementById("list");
 
-console.log(book1.name);
-
 let created_doms = [];
 
 function displayBooks() {
@@ -44,7 +42,6 @@ function addToDisplay(bookOBJ) {
 
   card.classList.add("card");
   card.id = bookOBJ.id;
-  console.log(card.id);
   card.appendChild(title);
   card.appendChild(author);
   card.appendChild(date);
@@ -57,6 +54,10 @@ function addToDisplay(bookOBJ) {
   read.type = "checkbox";
   read.id = "read";
   read.style = "margin-left: 8px";
+  // arrow function breaks the below function somehow
+  read.addEventListener("change", function () {
+    bookOBJ.read = this.checked;
+  });
   reader.appendChild(rad);
   reader.appendChild(read);
   card.appendChild(reader);
